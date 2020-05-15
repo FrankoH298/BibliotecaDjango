@@ -23,6 +23,17 @@ class Ejemplar(models.Model):
     Codigo = models.AutoField(primary_key=True)
     Localizacion = models.CharField(max_length=30)
     Libro = models.ForeignKey('Libro', on_delete=models.CASCADE, null=True,)
+    Usuarios = models.ManyToManyField('Usuario',)
 
     def __str__(self):
         return ("{} : {}: Libro:{}".format(self.Codigo, self.Localizacion, self.Libro))
+
+class Usuario(models.Model):
+    Codigo = models.AutoField(primary_key=True)
+    Nombre = models.CharField(max_length=20)
+    Telefono = models.BigIntegerField()
+    Direccion = models.CharField(max_length=40)
+    Ejemplares = models.ManyToManyField('Ejemplar',)
+
+    def __str__(self):
+        return ("{} : {}: {}".format(self.Codigo, self.Nombre, self.Telefono))
