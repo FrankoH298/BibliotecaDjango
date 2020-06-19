@@ -6,18 +6,22 @@ class EntryInLines(admin.TabularInline):
 
 class AuthorAdmin(admin.ModelAdmin):
     inlines = [EntryInLines,]
+    search_fields = ['Nombre',]
 
 class EjemplarAdmin(admin.ModelAdmin):
-    pass
-
+    list_display = ['Libro',]
+    
+class LibroAdmin(admin.ModelAdmin):
+    list_display = ['Titulo', 'Editorial',]
+    
 class UserAdmin(admin.ModelAdmin):
     
     fieldsets = (
-        ('Información Personal', {
-            'fields': ('Nombre', 'Direccion', 'Telefono', 'Edad',)
+        ('Datos', {
+            'fields': ('Nombre',)
         }),
-        ('Detalle de alquileres', {
-            'fields': ('Ejemplares',)
+        ('Contacto', {
+            'fields': ('Direccion', 'Telefono',)
         }),
     )
 
@@ -28,6 +32,6 @@ class UserAdmin(admin.ModelAdmin):
     
 # Register your models here.
 admin.site.register(Autor, AuthorAdmin)
-admin.site.register(Libro,)
+admin.site.register(Libro, LibroAdmin)
 admin.site.register(Ejemplar, EjemplarAdmin)
 admin.site.register(Usuario, UserAdmin)
