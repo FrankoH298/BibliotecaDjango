@@ -39,10 +39,12 @@ class Usuario(models.Model):
     Edad = models.IntegerField()
     
     def adults(self):
+        # Devuelve si es mayor o menor de edad
         return (self.Edad > 17)
     adults.boolean = True
     adults.short_description = 'Es mayor'
     
+    # Nos devuelve un texto con color
     def color(self):
         if self.adults():
             return mark_safe("<b style='color:green;'>Aprobado</b>")
